@@ -1,0 +1,135 @@
+:root{
+    /* Отношение ширины к высоте */
+    --index: calc(1vw + 1vh);
+    --transition: 1s cubic-bezier(0.030, 365, 0, 1);
+    --logo-size: calc(var(--index) * 8);
+}
+
+@font-face {
+    font-family: kameric-3d;
+    src: url(../fonts/kameric-font-3d.ttf);
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: merriweather-italic-3d;
+    src: url(../fonts/merriweather-italic-3d.ttf);
+    font-weight: regular;
+}
+
+body{
+   font-family: kameric-3d;
+   background-color: #000;
+   color: #fff; 
+}
+
+.logo {
+    position: absolute;
+    width: var(--logo-size); 
+    height: var(--logo-size);
+    background-repeat: no-repeat;
+    left: calc(50% - calc(var(--logo-size) / 2));
+    top: calc( var(--index) * 2.8);
+    z-index: 1;
+}
+
+.layers {
+    /* Перспектива */
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.layers__container {
+    height: 100vh;
+    min-height: 500px;
+    /* Стиль трансформации */
+    transform-style: preserve-3d;
+    transform: rotateX(var(--move-y)) rotateY(var(--move-x));
+    will-change: transform;
+    position: relative;
+    transition: transform var('--transition') ;
+
+}
+
+.layer__item {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -5vw;
+    left: -5vw;
+    right: -5vw;
+    bottom: -5vw;
+    background-size: cover;
+    background-position: center;
+}
+
+.layer-1 {
+    /* Положение в пространстве по оси  Z !!*/
+    transform: translateZ(-55px) scale(1.06);
+}
+
+.layer-2 {
+    transform: translateZ(80px) scale(.88);
+}
+
+.layer-3 {
+    transform: translateZ(180px) scale(.8);
+}
+
+.layer-4{
+    transform: translateZ(190px) scale(.9);
+}
+
+.layer-5{
+    transform: translateZ(300px) scale(.9);
+}
+
+.layer-6 {
+    transform: translateZ(380px);
+}
+
+.hero-content {
+    font-family: kameric-3d;
+    font-weight: 900;
+    font-size: calc(var(--index) * 3);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: calc(var(--index) * - .15);
+    line-height: 1.35em;
+    margin-top: calc(var(--index) * 5.5);
+}
+
+.hero-content span {
+   display: block;
+}
+
+.hero-content__p {
+    font-family: merriweather-italic-3d;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: calc(var(--index) * .73);
+    line-height: 1.6em;
+}
+
+
+.button-start{
+    font-family: Arial;
+    font-weight: 600;
+    font-size: calc(var(--index) * .8);
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    padding: calc(var(--index) * .5) calc(var(--index) * 1.5);
+    border: 3px solid rgb(255, 255, 255 / .4);
+    border-radius: 10em;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Чтобы можно быдл взаимотействовать с текстом и кнопкой нужно указать pointer-eventsЖ тщт для 4, 5, 6 слоя */
+
+.layer-4, .layer-5, .layer-6 {
+    pointer-events: none;
+}
